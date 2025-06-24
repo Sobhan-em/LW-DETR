@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download model from Hugging Face
         run: |
@@ -22,3 +22,12 @@ jobs:
         with:
           name: lwdetr-small-model
           path: output/LWDETR_small_60e_coco.pth
+
+      - name: Upload to FTP
+        uses: sebastianpopp/ftp-action@v2
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: output
+          remoteDir: ${{ secrets.FTP_REMOTE_DIR }}
