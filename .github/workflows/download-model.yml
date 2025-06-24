@@ -13,10 +13,12 @@ jobs:
       - name: Download model from Hugging Face
         run: |
           mkdir -p output
-          wget https://huggingface.co/xbsu/LW-DETR/resolve/main/pretrain_weights/LWDETR_small_60e_coco.pth -O output/LWDETR_small_60e_coco.pth
+          curl -L -o output/LWDETR_small_60e_coco.pth \
+            -H "User-Agent: Mozilla/5.0" \
+            https://huggingface.co/xbsu/LW-DETR/resolve/main/pretrain_weights/LWDETR_small_60e_coco.pth
 
       - name: Upload model as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lwdetr-small-model
           path: output/LWDETR_small_60e_coco.pth
