@@ -24,7 +24,7 @@ jobs:
           path: output/LWDETR_small_60e_coco.pth
 
       - name: Upload to FTP
-        uses: sebastianpopp/ftp-action@v2
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           host: ${{ secrets.FTP_HOST }}
           user: ${{ secrets.FTP_USERNAME }}
